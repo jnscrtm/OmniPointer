@@ -15,8 +15,8 @@ An `OmniPointer` internally holds:
 3. a `void(*)(void*)` that points to the appropriate destroyer function.
 
 ### Creation, Assignment, and Destruction
-- `OmniPointer` only allows move semantics, thus the copy constructor and copy assigment are deleted and unusable.
-- As far as uniqueness is concerned, `OmniPointer` is generally unique unless two are constructed from local raw pointers (not recommended).
+- `OmniPointer` only allows move semantics. The copy constructor and the copy assignment are marked deleted and are thus unusable.
+- As far as uniqueness is concerned, `OmniPointer` is generally unique unless two or more are constructed from the same local raw pointer (not recommended).
 - When the lifetime of an `OmniPointer` ends, the destructor is called, releasing the allocated memory through the specified destroyer function.
 
 ### Other
