@@ -1,9 +1,8 @@
 ﻿#include "OmniPointer.hpp"
 
-OmniPointer::OmniPointer(OmniPointer&& var) noexcept : _ptr(var._ptr), type_hash(var.type_hash), destroyer(var.destroyer)
+OmniPointer::OmniPointer(OmniPointer&& var) noexcept : _ptr(var._ptr), destroyer(var.destroyer)
 {
     var._ptr = nullptr;
-    var.type_hash = 0;
     var.destroyer = nullptr;
 }
 
@@ -13,7 +12,6 @@ void OmniPointer::Reset(std::nullptr_t) noexcept
         destroyer(_ptr);
 
     _ptr = nullptr;
-    type_hash = 0;
     destroyer = nullptr;
 }
 
@@ -30,11 +28,9 @@ OmniPointer& OmniPointer::operator=(OmniPointer&& var) noexcept
         destroyer(_ptr);
 
     _ptr = var._ptr;
-    type_hash = var.type_hash;
     destroyer = var.destroyer;
 
     var._ptr = nullptr;
-    var.type_hash = 0;
     var.destroyer = nullptr;
 
     return *this;
@@ -60,4 +56,10 @@ OmniPointer::~OmniPointer() noexcept
 {
     if (destroyer != nullptr)
         destroyer(_ptr);
+}
+
+template<>
+void OmniPointer::destroy_pointer<void>(void*)
+{
+    return;
 }
