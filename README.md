@@ -10,10 +10,8 @@ Consult `refman.pdf` for the general documentation of `OmniPointer`. You can als
 
 ## Brief Mechanism
 An `OmniPointer` internally holds:
-1. an `std::size_t` that holds the hash code of the last stored object's type, 
-2. a `void*` to hold the address of the object it currently owns, and
-3. a `void(*)(void*)` that points to the appropriate destroyer function.
-
+1. a `void*` to hold the address of the object it currently owns and
+2. a `void(*)(void*)` that points to the appropriate destroyer function (unique for each assigned type).
 ### Creation, Assignment, and Destruction
 - `OmniPointer` only allows move semantics. The copy constructor and the copy assignment are marked deleted and are thus unusable.
 - As far as uniqueness is concerned, `OmniPointer` is generally unique unless two or more are constructed from the same local raw pointer (not recommended).
