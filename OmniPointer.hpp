@@ -50,9 +50,7 @@ public:
     template <class T>
     T* Get() const
     {
-        if(std::is_void<T>::value)
-            return _ptr;
-        else if (destroyer == destroy_pointer<T>)
+        if (std::is_void<T>::value || destroyer == destroy_pointer<T>)
             return reinterpret_cast<T*>(_ptr);
         else
             throw std::logic_error("The latest stored object is not of the requested type.");
