@@ -113,6 +113,12 @@ public:
     /// @brief Has the same effect as `OmniPointer::Reset(std::nullptr_t)`.
     OmniPointer& operator=(std::nullptr_t) noexcept;
 
+    /// @brief Determines if two `OmniPointer`s are pointing at the same address.
+    bool operator==(const OmniPointer& other) const noexcept;
+
+    /// @brief Determines if two `OmniPointer`s are pointing at different addresses.
+    bool operator!=(const OmniPointer& other) const noexcept;
+
     /// @brief The same as `OmniPointer::Get<T>()`.
     /// @tparam T The desired type
     /// @exception std::logic_error when `T` does not match the information (given by the hash code) stored in the `OmniPointer`.

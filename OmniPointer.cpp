@@ -46,6 +46,16 @@ OmniPointer& OmniPointer::operator=(std::nullptr_t) noexcept
     return *this;
 }
 
+bool OmniPointer::operator==(const OmniPointer& other) const noexcept
+{
+    return _ptr == other._ptr;
+}
+
+bool OmniPointer::operator!=(const OmniPointer& other) const noexcept
+{
+    return _ptr != other._ptr;
+}
+
 OmniPointer::~OmniPointer() noexcept
 {
     if (destroyer != nullptr)
